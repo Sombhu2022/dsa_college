@@ -1,27 +1,23 @@
 #include <stdio.h>
 
-int binary(int arr[], int h, int l, int val)
+int binary(int arr[], int l, int h, int val)
 {
+    int mid;  
+   if( l <= h ){
+           mid  = (l+h) /2 ;
+           if( arr[mid] == val){
+            return mid ;
+           }
+           else if ( arr[mid] > val){
+            return binary( arr , l , mid-1 , val );
+           }
+           else{
+            return binary( arr , mid+1 , h , val);
+           }
 
-    int mid;
-    if (l <= h)
-    {
-        mid = l + h / 2;
+      }
+    return -1;   
 
-        if (arr[mid] == val)
-        {
-            return mid;
-        }
-        else if (arr[mid] < val)
-        {
-            binary(arr,mid+1 , h, val);
-        }
-        else
-        {
-            binary(arr, l , mid-1, val);
-        }
-    }
-    return -1;
 }
 
 int main()
@@ -39,7 +35,7 @@ int main()
     scanf("%d", &val);
     h = n - 1;
     l = 0;
-    pos = binary(arr, h, l, val);
+    pos = binary(arr, l ,h, val);
     if(pos == -1){
         printf("element is not exist");
     }else{
